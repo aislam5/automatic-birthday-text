@@ -1,8 +1,8 @@
 """
-1. Store Data in .csv file
-2. Use Python to get date (the date in the file and the date in python should be of the same format)
-3. OPen csv file and see if todays Date Matches the date in the csv file
-4. Send Message then (using package such as pywhatkit)
+1. Store Data in .csv file (DONE)
+2. Use Python to get date (the date in the file and the date in python should be of the same format (DONE)
+3. Open csv file and see if todays Date Matches the date in the csv file (DONE)
+4. Send Message then (using package such as pywhatkit) (Done)
 5. Run the Script daily somehow (schedule python package)
 """
 
@@ -11,6 +11,7 @@
 
 import csv
 import datetime
+import pywhatkit
 
 date = datetime.datetime.now()
 date_formatted = date.strftime("%m/%d")
@@ -23,6 +24,6 @@ with open('birthdays.csv') as csv_file:
             continue
         else:
             if row[1].strip() == date_formatted:
-                print(f"HBD {row[0]}")
+                pywhatkit.sendwhatmsg(row[2], f"Happy Birthday! {row[0]}", datetime.datetime.now().hour, datetime.datetime.now().minute+1 , 15, True, 2)
             line_count += 1
     print(f'Processes {line_count} lines.')
